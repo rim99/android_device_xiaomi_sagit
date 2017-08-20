@@ -37,6 +37,9 @@ on early-init
     write /proc/sys/kernel/sched_boost 1
     mkdir /persist 0771 root system
 
+    # Set permissions for dsp partition
+    mkdir /dsp 0771 media media
+
 on init
     write /dev/stune/foreground/schedtune.sched_boost_no_override 1
     write /dev/stune/top-app/schedtune.sched_boost_no_override 1
@@ -97,7 +100,6 @@ on post-fs-data
     mkdir /tombstones/dsps 0771 system system
     mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/hbtp 0750 system system
-    mkdir /data/misc/seemp 0700 system system
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/fpc 0770 system system
     mkdir /data/fpc/s 0771 system system
@@ -503,12 +505,6 @@ on property:init.svc.zygote=restarting
 #    socket vqtss stream 0660 system system
 #    user system
 #    group system
-
-#service seempd /system/bin/seempd
-#    class late_start
-#    user system
-#    group system
-#    socket seempdw dgram 0666 system system
 
 service energy-awareness /system/bin/energy-awareness
     class main
