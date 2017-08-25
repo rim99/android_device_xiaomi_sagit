@@ -96,6 +96,7 @@ PRODUCT_PACKAGES += \
     tinymix
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/audio/aanc_tuning_mixer.txt:system/etc/aanc_tuning_mixer.txt \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/audio_output_policy.conf:system/vendor/etc/audio_output_policy.conf \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml \
@@ -203,6 +204,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
 
+# Libshims
+PRODUCT_PACKAGES += \
+    libshims_imsmedia
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -234,9 +238,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/nfc/libnfc-nxp.conf:system/etc/libnfc-nxp.conf
 
 # Open gapps
-GAPPS_VARIANT := full
-
-$(call inherit-product, vendor/google/build/opengapps-packages.mk)
+GAPPS_VARIANT := pico
+GAPPS_FORCE_MATCHING_DPI := true
+GAPPS_FORCE_BROWSER_OVERRIDES := true
+$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
 
 # OMX
 PRODUCT_PACKAGES += \
