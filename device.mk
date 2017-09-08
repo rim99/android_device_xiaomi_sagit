@@ -15,7 +15,7 @@
 #
 
 # call the proprietary setup
-$(call inherit-product-if-exists, vendor/xiaomi/sagit/sagit-vendor.mk)
+$(call inherit-product, vendor/xiaomi/sagit/sagit-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
@@ -130,6 +130,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/camera_config.xml:system/etc/camera/camera_config.xml \
+    $(LOCAL_PATH)/configs/camera/imx268_chromatix.xml:system/etc/camera/imx268_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/imx386_semco_chromatix.xml:system/etc/camera/imx386_semco_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/s5k3m3_semco_chromatix.xml:system/etc/camera/s5k3m3_semco_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/sagit_imx268_liteon_chromatix.xml:system/etc/camera/sagit_imx268_liteon_chromatix.xml
+
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
     cneapiclient \
@@ -239,7 +246,7 @@ PRODUCT_COPY_FILES += \
 
 # Open gapps
 GAPPS_VARIANT := pico
-GAPPS_FORCE_MATCHING_DPI := true
+#GAPPS_FORCE_MATCHING_DPI := true
 GAPPS_FORCE_BROWSER_OVERRIDES := true
 $(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
 
